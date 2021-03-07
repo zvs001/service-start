@@ -4,15 +4,15 @@ Wait for server ready before start.
 
 ### Installation
 
-- npm: `npm i -S service-start`
-- yarn: `yarn add service-start`
+- npm: `npm i -S service-startup`
+- yarn: `yarn add service-startup`
 
 ### Usage
 You can use it like on example below.
 App will exit if there at least on step is failed.
 Check all connections before starting server:
 
-`startServices.ts` example
+You can create file for your services like `startServices.ts`
 ```typescript
 import colors from 'colors'
 import starter from 'service-startup'
@@ -39,7 +39,7 @@ export default starter([
 })
 ```
 
-`server.ts` example
+You can use it to wait for services start at `server.ts`:
 ```typescript
 import startServices from './startServices'
 
