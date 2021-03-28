@@ -29,6 +29,7 @@ export default starter([
   },
   {
     name: 'Media Service',
+    envBlackList: ['test'],
     onRun: async () => {
       mediaApi.setCredentials(config.media)
       await mediaApi.me.info()
@@ -48,4 +49,28 @@ startServices.then(() => {
     console.log(`Listening port: 3000`)
   })
 })
+```
+
+
+
+### Api
+
+Step interface:
+```typescript
+interface StarterStep {
+  name: string
+  onRun: Function
+  isRequired?: boolean
+  envWhiteList?: string | string[]
+  envBlackList?: string | string[]
+}
+```
+
+Config interface:
+```typescript
+interface StarterConfig {
+  successSymbol?: string
+  errorSymbol?: string
+  env?: string
+}
 ```
