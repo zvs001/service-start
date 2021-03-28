@@ -1,20 +1,24 @@
 // import { Spinner } from 'cli-spinner'
 import logSymbols from 'log-symbols'
+import isEnvOk from './isEnvOk'
 
 export interface StarterStep {
   name: string
   onRun: Function
   isRequired?: boolean
+  envWhiteList?: string | string[]
+  envBlackList?: string | string[]
 }
 
 export interface StarterConfig {
   successSymbol?: string
   errorSymbol?: string
+  env?: string
 }
 
 async function starter(steps: StarterStep[], config?: StarterConfig) {
   const date = new Date()
-  const { successSymbol = logSymbols.success, errorSymbol = logSymbols.error } = config || { }
+  const { successSymbol = logSymbols.success, errorSymbol = logSymbols.error, env = process.env.NODE_ENV } = config || { }
   console.log(`
 ********************************************************
 ***********             Startup             ************
@@ -24,8 +28,15 @@ async function starter(steps: StarterStep[], config?: StarterConfig) {
 
   for (let i = 0; i < steps.length; i++) {
     const step = steps[i]
-    const { name = '', isRequired = true } = step
+    const {
+      name = '', isRequired = true, envBlackList, envWhiteList,
+    } = step
+
     const fn = step.onRun
+
+    if (!isEnvOk({ envWhiteList, envBlackList, env })) {
+      continue
+    }
 
     // const spinner = new Spinner({
     //   text: 'Running',
