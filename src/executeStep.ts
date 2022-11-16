@@ -1,7 +1,7 @@
 // import { Spinner } from 'cli-spinner'
-import logSymbols from 'log-symbols'
-import isEnvOk from './isEnvOk'
-import { StarterStep } from './stepsList'
+import isEnvOk from './utils/isEnvOk'
+import { StartupStep } from './classes/StepsList'
+import colors from 'colors'
 
 export interface ExecuteStepConfig {
   successSymbol?: string
@@ -9,8 +9,8 @@ export interface ExecuteStepConfig {
   env?: string
 }
 
-async function executeStep(step: StarterStep, config?: ExecuteStepConfig) {
-  const { successSymbol = logSymbols.success, errorSymbol = logSymbols.error, env = process.env.NODE_ENV } = config || { }
+async function executeStep(step: StartupStep, config?: ExecuteStepConfig) {
+  const { successSymbol = colors.green('[READY]'), errorSymbol = colors.red('[ERROR]'), env = process.env.NODE_ENV } = config || { }
 
   const {
     name = '', isRequired = true, envBlackList, envWhiteList,

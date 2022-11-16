@@ -12,13 +12,15 @@ You can use it like on example below.
 App will exit if there at least on step is failed.
 Check all connections before starting server:
 
-You can create file for your services like `service-startup.ts`
+You can create file for your services like `service-startup.ts`. 
+Note that this file will be important automatically, 
+so you don't need to import it. But you can create own separate files
+
 ```typescript
-import colors from 'colors'
-import starter from 'service-startup'
+import serviceStartup from 'service-startup'
 // databases and others...
 
-export default starter([
+serviceStartup.addPrioritizedSteps([
   {
     name: 'PostgreSQL',
     onRun:  () => client.connect(),
@@ -27,24 +29,31 @@ export default starter([
     name: 'MongoDB',
     onRun: () => connectMongo(),
   },
-  {
-    name: 'Media Service',
-    envBlackList: ['test'],
-    onRun: async () => {
-      mediaApi.setCredentials(config.media)
-      await mediaApi.me.info()
-    },
+])
+```
+
+Also you can add steps from inside single library files to support dynamic import:
+
+```tsx
+// lib/media.ts
+import serviceStartup from 'service-startup'
+
+serviceStartup.addStep({
+  name: 'Media Service',
+  envBlackList: ['test'],
+  onRun: async () => {
+    mediaApi.setCredentials(config.media)
+    await mediaApi.me.info()
   },
-], {
-  successSymbol: colors.green('[READY]'),
 })
 ```
 
+
 You can use it to wait for services start at `server.ts`:
 ```typescript
-import startServices from './startServices'
+import serviceStartup from 'service-startup'
 
-startServices.then(() => {
+serviceStartup.start().then(() => {
   server.listen(3000, () => {
     console.log(`Listening port: 3000`)
   })

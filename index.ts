@@ -1,5 +1,5 @@
-import starter from './src/starter'
+import serviceStartup from './src/startup'
 
-export * from './src/starter'
+export * from './src/startup'
 
-export default starter
+export default serviceStartup
