@@ -12,7 +12,7 @@ You can use it like on example below.
 App will exit if there at least on step is failed.
 Check all connections before starting server:
 
-You can create file for your services like `startServices.ts`
+You can create file for your services like `service-startup.ts`
 ```typescript
 import colors from 'colors'
 import starter from 'service-startup'
