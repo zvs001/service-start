@@ -8,7 +8,12 @@
     "postpublish": "npm run clean",
     "clean": "npx module-kit-clean"
   },
-  "keywords": ["start", "startup", "run", "service"],
+  "keywords": [
+    "start",
+    "startup",
+    "run",
+    "service"
+  ],
   "author": {
     "name": "Vladislav Zaynchkovsky",
     "email": "zvsx001@gmail.com"

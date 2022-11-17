@@ -8,14 +8,6 @@ function resolvePathFromRoot(filePath: string): string {
 }
 
 
-function resolveMigration(fileName: string) {
-  const filePath = `./${getMigrationPath(fileName)}`
-
-  const pathAbsolute = resolvePathFromRoot(filePath)
-
-  return importFile(pathAbsolute)
-}
-
 function importFile(filePath:string) {
   // eslint-disable-next-line
   const fnMigration = require(filePath)
@@ -30,7 +22,6 @@ function requireFromRoot(filePath: string) {
 
 export default {
   resolvePathFromRoot,
-  resolveMigration,
   importFile,
   requireFromRoot,
 }
