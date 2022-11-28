@@ -5,12 +5,13 @@ import logStartupInfo from './utils/logStartupInfo'
 
 export { StartupStep }
 export interface StarterConfig extends ExecuteStepConfig {
+  startup_path?: string
 }
 
 
 class ServiceStartup extends StepsList {
   async start(config?: StarterConfig) {
-    await fileUtil.requireRootDefaultSetupFile()
+    await fileUtil.requireRootDefaultSetupFile({ filePath: config?.startup_path || './startup' })
 
     logStartupInfo()
 

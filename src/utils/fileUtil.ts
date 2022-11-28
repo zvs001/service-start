@@ -1,7 +1,7 @@
 import resolveUtils from '../lib/resolveUtils'
 
-function requireRootDefaultSetupFile() {
-  const path = resolveUtils.resolvePathFromRoot('service-startup')
+function requireRootDefaultSetupFile({ filePath }: { filePath: string}) {
+  const path = resolveUtils.resolvePathFromRoot(filePath)
   try {
     require(path)
   } catch (e) {
