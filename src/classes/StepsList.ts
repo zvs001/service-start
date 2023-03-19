@@ -35,7 +35,7 @@ class StepsList {
 
   getSteps(): StartupStep[] {
     const steps = this.steps.concat(this.stepsEnd)
-    return this.steps
+    return steps
   }
 }
 
