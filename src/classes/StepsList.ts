@@ -11,10 +11,16 @@ export interface StartupStep {
 
 class StepsList {
   steps: StartupStep[] = []
+  stepsEnd: StartupStep[] = []
 
   addStep(step: StartupStep) {
     if(!step) return null
     this.steps.push(step)
+  }
+
+  addLateStep(step: StartupStep) {
+    if(!step) return null
+    this.stepsEnd.push(step)
   }
 
   addSteps(steps: StartupStep[]) {
@@ -28,6 +34,7 @@ class StepsList {
   }
 
   getSteps(): StartupStep[] {
+    const steps = this.steps.concat(this.stepsEnd)
     return this.steps
   }
 }
