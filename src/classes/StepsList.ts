@@ -10,8 +10,8 @@ export interface StartupStep {
 
 
 class StepsList {
-  steps: StartupStep[] = []
-  stepsEnd: StartupStep[] = []
+  private steps: StartupStep[] = []
+  private stepsEnd: StartupStep[] = []
 
   addStep(step: StartupStep) {
     if(!step) return null

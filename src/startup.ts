@@ -15,7 +15,7 @@ class ServiceStartup extends StepsList {
 
     logStartupInfo()
 
-    const { steps } = this
+    const steps = this.getSteps()
 
     for (let i = 0; i < steps.length; i++) {
       const step = steps[i]
