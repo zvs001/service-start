@@ -2,4 +2,4 @@
 **/*.d.ts
 !typings/*
 node_modules
-yar
+yarn-error.log

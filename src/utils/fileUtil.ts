@@ -1,20 +1,21 @@
-import resolveUtils from '../lib/resolveUtils'
+import rootRequireUtil from "root-require-utils"
 
 function requireRootDefaultSetupFile({ filePath }: { filePath: string}) {
-  const path = resolveUtils.resolvePathFromRoot(filePath)
+  const isConfigExists = rootRequireUtil.exists(filePath)
+  if(!isConfigExists) return null
+
   try {
-    require(path)
+    rootRequireUtil.require(filePath)
   } catch (e) {
-    // seems file is not created...
+    console.error('[service-startup] Failed to load config:', filePath + '!', e)
   }
 }
 
 function getInfoFromRootPackageJson() {
-  const packageJsonPath  = resolveUtils.resolvePathFromRoot('package.json')
   try {
-    const packageJson = require(packageJsonPath)
+    const packageJson = rootRequireUtil.require('package.json')
 
-    if(!packageJson) return  null
+    if(!packageJson) return null
     return {
       name: packageJson.name,
       version: packageJson.version,
@@ -23,7 +24,7 @@ function getInfoFromRootPackageJson() {
     // seems file is not created...
   }
 
-  return  null
+  return null
 }
 
 
